@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html></html>
+
+
+  <h1>Create Post</h1>
+  <form method='POST' enctype='multipart/form-data' id='ModalForm'>
+              {% csrf_token %}
+              <textarea name="message" placeholder="What's on your mind..." cols="80" rows="10"></textarea><br>
+              <button><input type='file' name='media' value='add media'></button>
+              <button class='button' type="submit">Post</button>
+            </form>        
+</html>

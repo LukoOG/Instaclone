@@ -1,0 +1,78 @@
+/** *{
+border: 0.5px solid black;	
+}
+**/
+body{
+	margin: 0 0;
+	padding: 0 0;
+}
+header{
+	background-color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+	display: flex;
+	flex-direction: column;
+}
+
+.status{
+	position:;
+	top:0;
+	height: 30vh;
+	left:0;
+	z-index: 2;
+}
+
+.info-body{
+	display: flex;
+	flex-basis: auto;
+	top:0;
+	width:100%;
+	position:sticky;
+	justify-content: space-between;
+	color: #bfd12;
+}
+
+.info-col{
+	display: inline-block;
+	font-size: 12px;
+  text-align:center;
+}
+
+.info-col .image img{
+	height: 120px;
+	width: 120px;
+	border-radius: 50%;
+}
+
+.info-col-2{
+	margin-top: 2.5%;
+	width: 100%;
+	right: 0;
+}
+
+.post .media{
+	width: 35vw;
+	height: 60vh;
+}
+
+#dmmessagelist{
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+/** universal classes **/
+
+.profile-pic{
+  height: 0.5rem;
+  width: 0.5rem;
+	border-radius: 50%;
+}
+
+.img_comment{
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  
+}
+
+.liked{
+  color: #e90707;
+}

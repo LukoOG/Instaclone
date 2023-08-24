@@ -1,0 +1,24 @@
+{% extends 'user/main.html' %}
+{% load static %}
+<body>
+  {% block content %}
+  <link rel='stylesheet' href={% static 'user/css/post.css' %}>
+  <div>
+  <form method='POST' enctype='multipart/form-data'>
+  {% csrf_token %}
+  {{formie}}
+  <input type='submit' value='Create Post'>
+  </form>
+  </div>
+</body>
+
+
+
+
+
+<p>Sike!!!</p>
+
+
+
+
+{% endblock %}

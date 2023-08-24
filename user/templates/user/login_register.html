@@ -1,0 +1,59 @@
+{% extends 'user/main.html' %} <!---and extend the main template -->
+{% load static %}
+{% block content %}
+  {% if page == 'login' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href={% static style3.css %}>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login Here</h1>
+        <form method="POST">
+          {% csrf_token %}
+            <p>Username</p>
+            <input type="text" name="user" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="pass" placeholder="Enter Password">
+            <input type="submit" name="login" value="Login">
+
+            <span><a href="{% url 'user:register' %}">Sign Up</a></span>
+			<span><a href="{% url 'user:home' %}">Continue to site</a></span>
+
+        <footer>
+            <p>Yomi Denzel Foundation &copy; 2023 </p>
+        </footer>
+        </form>
+    </div>
+
+      
+        {% elif page == 'register' %}
+<div class="main">
+  <div class="register">
+    <form action="" method="POST">
+            {% csrf_token %}
+        <p>Username</p>
+        <input type="text" name="username" placeholder="Enter Username">
+        <p>Password</p>
+        <input type="password" name="password1" placeholder="Enter Password">
+        <p>Re-enter password</p>
+        <input type="password" name="password2" placeholder="Re-enter Password">
+        <h6>Requirement.At least 9 characters or more. Including Letters, digits and @/./+/-/_ only.</h6>
+<br>
+  
+        <input type="submit" value="Create Account">
+        <p>Already have an Account, <a href="{% url 'user:login' %}">Login Here</a></p>
+  		  <p><a href="{% url 'user:home' %}">Continute without signnig up</a></p>
+    
+    </form>
+  </div>
+</div>
+        {% endif %}
+{% endblock %}
+  </body>
+</html>

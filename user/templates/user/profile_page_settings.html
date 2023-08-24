@@ -1,0 +1,17 @@
+{% extends 'user/main.html' %}
+<body>
+  {% block content %}
+  <form method='POST' action='' enctype='multipart/form-data'>
+  				{% csrf_token %}
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" required placeholder="enter new name" name='username'>
+            </div>
+          </div>
+  				{{form}}
+  				<input class='btn btn-primary' type ='submit'>
+  			</form>
+    </body>
+{% endblock %}
+  

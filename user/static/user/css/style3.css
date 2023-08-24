@@ -1,0 +1,100 @@
+body{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.login-box{
+    width: 320px;
+    height: 420px;
+    background-color:rgb(102, 223, 207);
+    color: whitesmoke;
+    top:50%;
+    left:50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+
+}
+
+
+h1{
+    margin: 0;
+    padding:0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+.login-box{
+    border-radius: 30px;
+}
+.login-box p{
+    margin: 0;
+    padding:0;
+    font-weight: bold;
+}
+
+.login-box input{
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: black ;
+    height: 30px;
+    color: #fff;
+}
+input[type="submit"]:hover{
+    background-color: lightseagreen;
+    cursor: pointer;
+    border-style: none;
+}
+input[type="submit"]{
+    border-radius: 20px;
+}
+
+input[type="text"], input[type="password"]
+ {
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent ;
+    outline: none;
+    height: 40px;
+}
+
+
+a{
+    text-decoration: none;
+    line-height: 20px;
+    color:grey;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+a:hover{
+    color:green;
+    cursor: pointer;
+}
+
+footer{
+    padding-top:20px
+}
+
+.register{
+  width: 350px;
+  height: 500px;
+  background-color:rgb(102, 223, 207);
+  color: whitesmoke;
+  top:50%;
+  left:50%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+  border-radius:10%;
+  width:30%;
+
+}
+
+.register input{
+    width: 100%;
+    margin-bottom: 20px;
+    height: 30px;
+    color:black;
+}

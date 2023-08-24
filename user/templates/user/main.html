@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include the Bulma CSS framework for styling -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+	<link rel='stylesheet' href={% static 'user/css/style.css' %}>
+  <link rel='stylesheet' href={% static 'user/css/style3.css' %}> 
+  <link rel='stylesheet' href={% static 'user/css/post.css' %}>
+	<link rel="icon" type="image/x-icon" href={% static 'user/images/logo.jpg' %}>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    {% if request.user.is_authenticated %}
+    <title>{{request.user}}'s dstargram</title>
+    {% else %}
+    <title>Dstargram</title>
+    {% endif %}
+</head>
+<body>
+	
+  {% include 'user/navbar.html'%}
+	{% if request.user.is_authenticated%}
+	{% include 'user/status.html' %}
+  {% endif %}
+    {% block content %}
+
+
+    
+    {% endblock %}
+  </body>
+  <script src={% static 'user/js/csrf.js' %}></script>
+  <script src={% static 'user/js/postModal.js' %}></script>
+  <script src={% static 'user/js/like_unlike.js' %}></script>
+  <script src={% static 'user/js/follow_unfollow.js' %}></script>
+   <script src={% static 'user/js/comment.js' %}></script>
+  <script>
+  $(document).ready(function() {
+    // Toggle the "is-active" class on the "navbar-burger" and "navbar-menu" elements
+    $(".navbar-burger").click(function() {
+      $(".navbar-burger").toggleClass("is-active");
+      $("#navBarDropdown").toggleClass("is-active");
+    });
+  });
+</script>
+  <script src="https://kit.fontawesome.com/cf9c7a4c95.js" crossorigin="anonymous"></script>
+</html>

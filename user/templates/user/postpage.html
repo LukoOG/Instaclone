@@ -1,0 +1,75 @@
+{% extends 'user/main.html' %}
+{% load static %}
+<body>
+{% block content %}
+
+<div class="box post">
+  <link rel='stylesheet' href={% static 'user/css/post.css' %}>
+	<figure class="image is-96x96">
+	  <img class='is-rounded' src={% static post.profile.profile_pic %}>
+	</figure>
+  {% if post.profile == request.user.profile %}
+  <a href='{% url "user:updatePost" post.id %}'>Update Post</a><br>
+  <a href='{% url "user:delete" post.id %}'>Delete Post</a>
+  {% endif %}
+	{% if post.message %}
+	<p class='subtitle is-4'>{{post.message}}</p
+	{% endif %}
+  
+	<div>
+		{% if post.media %}
+			<figure >
+				<img class='media' src= {% static post.media %}/>
+			</figure>
+		{% endif %}
+    {% if request.user.profile in post.like.all %}
+      <form method='POST' action=''>
+        {% csrf_token %}
+        <p class="control">
+          <button class="button" id='likeBtn' name='like' value='unlike'>
+             <i class="fa-solid fa-heart liked" id='likeIcon'></i>
+          </button>
+        </p>
+        <span data-post-id='{{post.id}}' data-action='unlike' id='like'>{{likes}}</span>
+      </form>    
+    {% else %}
+      <form method='POST' action=''>
+        {% csrf_token %}
+        <p class="control">
+          <button class='button' id='likeBtn' name='like' value='like'>
+             <i class="fa-solid fa-heart" id='likeIcon'></i>
+          </button>
+        </p>
+        <span data-post-id='{{post.id}}' data-action='like' id='like'>{{likes}}</span>
+      </form>
+    {% endif %}
+		<span class="is-small has-text-grey-light">
+			posted by {{post.profile}} on {{post.date}}
+		</span>
+		<div class='block' id='commentlist'>
+         {%for comment in comment%}
+    			{% if comment.post == post %}    
+            <div class='post block'>
+      				<p class='subtitle is-6'><img class='img_comment' src={% static comment.profile.profile_pic %}/>{{comment.profile|title}}: {{comment.message}}
+              {% if comment.profile == request.user.profile %}
+    <span><a href="{% url 'user:deleteC' comment.id %}"><i class="fa-solid fa-trash"></i></a></span>
+    <span><a href=""><i class="fa-solid fa-edit"></i></a></span>
+    {% endif %}
+              </p> 
+    
+            </div>
+    				{% endif %}
+  				{% endfor %}
+        </div>
+      </div>
+	</div>
+	<div>
+	<form method='POST'>
+	{% csrf_token %}
+	<input type='text' data-post-id='{{post.id}}' id='commentInput' placeholder='Enter your Comment...' name='comment'>
+	
+	</form>
+	</div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'user/main.html' %}
+{% load static %}
+<body>
+{% block content %}
+{% for profile in profile %}
+  <div class='content'>
+            <a href="{% url 'user:profile_page' profile.id %}">
+  <figure class="image is-48x48">
+    <img class='is-rounded'src={% static profile.profile_pic %}>
+  </figure>
+                <p>{{ profile }}</p>
+            </a>
+        </div>
+{% endfor %}
+</body>
+{% endblock %}

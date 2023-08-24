@@ -1,0 +1,5 @@
+we have to seperate the api functions, so it's easier to read and debug
+e.g
+postViews
+homeViews
+e.t.c

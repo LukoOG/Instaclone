@@ -1,0 +1,161 @@
+{% extends 'user/main.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<main class='columns'>
+	<section class='column is-two-third'>
+		<p class="title is-1">Home</p>
+		<p class="subtitle is-3">Check the posts of people you follow</p>
+   <button class='button is-white is-light is-medium' id='ModalBtn' aria-label="close">Or make your own post</button>
+    
+    <div class="modal" id='Modal'>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Make your Post</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+         <div>
+            <label id="caption">Message</label>
+            <form method='POST' enctype='multipart/form-data' id='ModalForm'>
+              {% csrf_token %}
+              <textarea name="message" placeholder="What's on your mind..." cols="80" rows="10"></textarea><br>
+              <button><input type='file' name='media' value='add media'></button>
+              <button class='button' type="submit">Post</button>
+            </form>             
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button">Cancel</button>
+        </footer>
+      </div>
+    </div>
+
+
+    <div id='postlist'>
+  		{% for post in all_post.all %}
+  		
+      <div class="box post">
+        <a href='{% url "user:postpage" post.id %}'>
+    			<figure class="image" style="width: 96px; height: 96px; max-width: 100%; max-height: 100%; overflow: hidden;" >
+    			  <img class='profile-pic' src={% static post.profile.profile_pic %}>
+    			</figure>
+    
+    			{% if post.message %}
+    			<p class='subtitle is-4'>{{post.message}}</p>
+    			{% endif %}
+    			<div>
+    				{% if post.media %}
+    					<figure >
+    						<img class='media' src= {% static post.media %}/>
+    					</figure>
+    				{% endif %}
+    				<span class="is-small has-text-grey-light">
+    					posted by {{post.profile}} on {{post.date}}
+    				</span>
+    			</div>
+        </a>
+        <div class='block'>
+         
+        </div>
+      </div>
+  		
+      
+      {% empty %}
+        <p class='subtitle is-4 is-primary is-white'>Follow other profiles to get started</p>
+  		{% endfor %}
+    </div>
+	</section>
+	
+	<section class="column is-one-third">
+		<div class="block">
+			<a href="{% url 'user:profiles' %}">
+				<button class="button is-dark is-outlined is-fullwidth">
+					All Profiles
+				</button>
+			</a>
+		</div>
+		
+		<div class="block">
+        <h3 class="title is-4">
+            You follow:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for following in user_profile.follows.all %}
+				{% if following == user_profile %}
+				{% else %}
+                <li class='columns'>
+                    <a href="{% url 'user:profile_page' following.user.profile.id %}">
+					<figure class="image is-48x48">
+						<img class='is-rounded'src={% static following.profile_pic %}>
+					</figure>
+                        {{ following }}
+                    </a>
+                </li>
+				{% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="block">
+        <h3 class="title is-4">
+            You are followed by:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for follower in user_profile.followed_by.all %}
+				{% if follower == user_profile %}
+				{% else %}
+                <li class='columns'>
+                    <a href="{% url 'user:profile_page' follower.user.profile.id %}">
+					<figure class="image is-48x48">
+						<img class='is-rounded'src={% static follower.profile_pic %}>
+					</figure>
+                        {{ follower }}
+                    </a>
+                </li>
+				{% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </section>
+	
+	
+
+	{% else %}
+		<p class="title is-1">Home</p>
+		<p class="subtitle is-3">Check the posts of people you follow</p>
+		{% for post in all_post.all %}
+		<div class="box post">
+			<figure class="image is-96x96">
+			  <img class='is-rounded'src={% static post.profile.profile_pic %}>
+			</figure>
+			<p class='subtitle is-4'>{{post.message}}</p>
+			<div>
+				{% if post.media %}
+					<figure >
+						<img class='media' src= {% static post.media %}/>
+					</figure>
+				{% endif %}
+				<span class="is-small has-text-grey-light">
+					posted by {{post.profile}} on {{post.date}}
+				</span>
+			</div>
+		</div>
+		{% endfor %}
+	{% endif %}
+</main>
+{% endblock %}

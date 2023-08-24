@@ -1,0 +1,62 @@
+{% load static %}
+{% csrf_token %}
+<input type="hidden" id="dm" value="{{dm}}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include the Bulma CSS framework for styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="icon" type="image/x-icon" href={% static 'user/images/logo.jpg' %}>
+  <link rel='stylesheet' href={% static 'user/css/style.css' %}>
+  <title>{{request.user.profile}}'s dstargram</title>
+</head>
+<body>
+	<div class="columns is-centered">
+  <div class="column is-8">
+    <div class="box">
+      <div class="columns is-vcentered">
+        <div class="column is-3 has-text-centered">
+          <figure class="image is-64x64">
+           {# {% for title in dm_title %} #}
+            <img class="is-rounded" src={% static dm_title.0.profile_pic %} alt="Profile Picture">
+           {# {% endfor %} #}
+          </figure>
+        </div>
+        {{dm_title.user.username}}
+        <div class="column">
+         {# {% for title in dm_title%} #}
+          <span class="title is-5">{{dm_title.0|title}}</span>
+          <br>
+          <span class="subtitle is-6">Online</span>
+         {# {% endfor %} #}
+        </div>
+        <div class="column is-3 has-text-right">
+          <a href='{% url "user:profile_page" dm_title.0.id %}'><button class="delete"></button></a>
+        </div>
+      </div>
+      <hr>
+      <div id='dmmessagelist'>
+       
+      </div>
+      <div class="field">
+        <div class="control">
+          <input id='dmmessage' data-profile='{{dm_title.0}}' class="textarea" placeholder="Type a message...">
+        </div>
+      </div>
+      <div class="field is-grouped is-grouped-right">
+        <p class="control">
+          <button class="button is-primary" id='messageBtn'><i class="fa fa-paper-plane"></i></button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src={% static 'user/js/csrf.js' %} ></script>
+<script src={% static 'user/js/dm.js' %} ></script>
+<script src={% static 'user/js/dmsocket.js' %}></script>
+<script src="https://kit.fontawesome.com/cf9c7a4c95.js" crossorigin="anonymous"></script>
+</body>
+</html>
